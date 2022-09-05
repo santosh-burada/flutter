@@ -13,6 +13,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String buttonPressed = 'Clicked';
+  int navigationIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,15 +37,30 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
           ],
+          currentIndex: navigationIndex,
+          onTap: (int index) {
+            setState(() {
+              navigationIndex = index;
+            });
+          },
         ),
         body: Center(
-          child: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  buttonPressed = 'Pressed';
-                });
-              },
-              child: Text(buttonPressed)),
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    buttonPressed = 'Pressed';
+                  });
+                },
+                child: Text(buttonPressed),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Second Button'),
+              )
+            ],
+          ),
         ),
       ),
     );
